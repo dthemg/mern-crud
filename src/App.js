@@ -8,6 +8,12 @@ import { EditTodo } from './components/edit-todo.component';
 import { CreateTodo } from './components/create-todo.component';
 
 
+/*
+This is a really good tutorial
+Finished part 1, continue with part 2 here:
+https://medium.com/codingthesmartway-com-blog/the-mern-stack-tutorial-building-a-react-crud-application-from-start-to-finish-part-2-637f337e5d61
+*/
+
 function App() {
   return (
     <Router>
