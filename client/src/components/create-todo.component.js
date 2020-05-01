@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 export function CreateTodo() {
   const [todoDescription, setTodoDescription] = useState("");
@@ -11,30 +11,30 @@ export function CreateTodo() {
     if (event) {
       event.preventDefault();
     }
-    
+
     const newTodo = {
       todo_description: todoDescription,
       todo_responsible: todoResponsible,
       todo_priority: todoPriority,
-      todo_completed: todoCompleted
-    }
+      todo_completed: todoCompleted,
+    };
 
-    console.log("Posting")
+    console.log("Posting");
 
-    axios.post('http://localhost:9000/createNew', newTodo)
-    .then(res => console.log(res.data));
-    
+    axios
+      .post("http://localhost:9000/createNew", newTodo)
+      .then((res) => console.log(res.data));
+
     setTodoDescription("");
     setTodoResponsible("");
     setTodoPriority("");
     setTodoCompleted(false);
+  };
 
-  }
-
-  return(
-    <div style={{marginTop: 10}}>
+  return (
+    <div style={{ marginTop: 10 }}>
       <h3>Create TODO</h3>
-      <form onSubmit={ onSubmit }>
+      <form onSubmit={onSubmit}>
         <div className="form-group">
           <label>Description</label>
           <input
@@ -97,5 +97,5 @@ export function CreateTodo() {
         </div>
       </form>
     </div>
-  )
+  );
 }

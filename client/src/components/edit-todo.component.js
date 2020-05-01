@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 export function EditTodo(props) {
   const [todoDescription, setTodoDescription] = useState("");
@@ -8,43 +8,45 @@ export function EditTodo(props) {
   const [todoCompleted, setTodoCompleted] = useState(false);
 
   const id = props.match.params.id;
- 
+
   useEffect(() => {
-    axios.get('http://localhost:9000/getOne/' + id)
-    .then(response => {
-      setTodoDescription(response.data.todo_description);
-      setTodoResponsible(response.data.todo_responsible);
-      setTodoPriority(response.data.todo_priority);
-      setTodoCompleted(response.data.todo_completed);
-    })
-    .catch(function(err) { console.log(err) });
-  }, [])
-  
-  
+    axios
+      .get("http://localhost:9000/getOne/" + id)
+      .then((response) => {
+        setTodoDescription(response.data.todo_description);
+        setTodoResponsible(response.data.todo_responsible);
+        setTodoPriority(response.data.todo_priority);
+        setTodoCompleted(response.data.todo_completed);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }, []);
+
   const onSubmit = (event) => {
     if (event) {
       event.preventDefault();
     }
-    
+
     const updatedTodo = {
       todo_description: todoDescription,
       todo_responsible: todoResponsible,
       todo_priority: todoPriority,
-      todo_completed: todoCompleted
-    }
+      todo_completed: todoCompleted,
+    };
 
-    console.log("Posting")
+    console.log("Posting");
 
-    axios.post('http://localhost:9000/update/' + id, updatedTodo)
-    .then(res => console.log(res.data))
-    .then(() => props.history.push('/'))
-    
-  }
+    axios
+      .post("http://localhost:9000/update/" + id, updatedTodo)
+      .then((res) => console.log(res.data))
+      .then(() => props.history.push("/"));
+  };
 
-  return(
-    <div style={{marginTop: 10}}>
+  return (
+    <div style={{ marginTop: 10 }}>
       <h3>Edit</h3>
-      <form onSubmit={ onSubmit }>
+      <form onSubmit={onSubmit}>
         <div className="form-group">
           <label>Description</label>
           <input
@@ -121,8 +123,6 @@ export function EditTodo(props) {
               <label className="form-check-label">Done</label>
             </div>
           </div>
-
-
         </div>
         <div className="form-group">
           <input
@@ -133,5 +133,5 @@ export function EditTodo(props) {
         </div>
       </form>
     </div>
-  )
+  );
 }

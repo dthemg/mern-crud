@@ -25,14 +25,16 @@ exports.register = (req, res) => {
         email: req.body.email,
         password: req.body.password
       });
-      // Hash password
+      // Hash password and store in db
       bcrypt.genSalt(10, (err, salt) => {
-        if (err) throw err;
-        newUser.password = hash;
-        newUser
-          .save()
-          .then(user => res.json(user))
-          .catch(err => console.log(err));
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+          newUser.password = hash;
+          newUser
+            .save()
+            .then(user => res.json(user))
+            .catch(err => console.log(err));
+        })
       });
     }
   });
