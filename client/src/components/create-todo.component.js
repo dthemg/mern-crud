@@ -1,32 +1,47 @@
 import React, { useState } from 'react';
-
+import axios from 'axios';
 
 export function CreateTodo() {
   const [todoDescription, setTodoDescription] = useState("");
   const [todoResponsible, setTodoResponsible] = useState("");
-  const [todoPriority, setTodoPriority] = useState("Medium");
+  const [todoPriority, setTodoPriority] = useState("");
   const [todoCompleted, setTodoCompleted] = useState(false);
 
   const onSubmit = (event) => {
-    event.preventDefault();
-    console.log("Submit function called. Contents:");
-    console.log(`Description: ${todoDescription}`);
-    console.log(`Responsible: ${todoResponsible}`);
-    console.log(`Priority: ${todoPriority}`);
-    console.log(`Completed: ${todoCompleted}`);
+    if (event) {
+      event.preventDefault();
+    }
+    
+    const newTodo = {
+      todo_description: todoDescription,
+      todo_responsible: todoResponsible,
+      todo_priority: todoPriority,
+      todo_completed: todoCompleted
+    }
+
+    console.log("Posting")
+
+    axios.post('http://localhost:9000/createNew', newTodo)
+    .then(res => console.log(res.data));
+    
+    setTodoDescription("");
+    setTodoResponsible("");
+    setTodoPriority("");
+    setTodoCompleted(false);
+
   }
 
   return(
     <div style={{marginTop: 10}}>
       <h3>Create TODO</h3>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={ onSubmit }>
         <div className="form-group">
           <label>Description</label>
           <input
             type="text"
             className="form-control"
-            value={todoDescription.value}
-            onChange={setTodoDescription}
+            value={todoDescription}
+            onChange={(event) => setTodoDescription(event.target.value)}
           />
         </div>
         <div className="form-group">
@@ -34,8 +49,8 @@ export function CreateTodo() {
           <input
             type="text"
             className="form-control"
-            value={todoResponsible.value}
-            onChange={setTodoResponsible}
+            value={todoResponsible}
+            onChange={(event) => setTodoResponsible(event.target.value)}
           />
         </div>
         <div className="form-group">
