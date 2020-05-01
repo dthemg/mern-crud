@@ -36,17 +36,14 @@ export function EditTodo(props) {
     console.log("Posting")
 
     axios.post('http://localhost:9000/update/' + id, updatedTodo)
-    .then(res => console.log(res.data));
+    .then(res => console.log(res.data))
+    .then(() => props.history.push('/'))
     
-    setTodoDescription("");
-    setTodoResponsible("");
-    setTodoPriority("");
-    setTodoCompleted(false);
   }
 
   return(
     <div style={{marginTop: 10}}>
-      <h3>Edit TODO</h3>
+      <h3>Edit</h3>
       <form onSubmit={ onSubmit }>
         <div className="form-group">
           <label>Description</label>
@@ -100,6 +97,32 @@ export function EditTodo(props) {
             />
             <label className="form-check-label">High</label>
           </div>
+          <div className="form-group">
+            <div className="form-check form-check-inline">
+              <input
+                type="radio"
+                name="completedOptions"
+                id="completedFalse"
+                value={false}
+                checked={todoCompleted === false}
+                onChange={() => setTodoCompleted(false)}
+              />
+              <label className="form-check-label">TODO</label>
+            </div>
+            <div className="form-check form-check-inline">
+              <input
+                type="radio"
+                name="completedOptions"
+                id="completedTrue"
+                value={false}
+                checked={todoCompleted === true}
+                onChange={() => setTodoCompleted(true)}
+              />
+              <label className="form-check-label">Done</label>
+            </div>
+          </div>
+
+
         </div>
         <div className="form-group">
           <input
