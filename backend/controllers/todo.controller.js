@@ -36,6 +36,20 @@ exports.updateById = (req, res) => {
   });
 }
 
+exports.deleteById = (req, res) => {
+  console.log("Delete by ID called");
+  console.log(req.params.id);
+  Todo.findByIdAndDelete(req.params.id, function(err, result) {
+    if (err) {
+      console.log(error);
+      res.status(404).send("Could not find todo with id")
+    } else {
+      console.log("Remove successful");
+      res.status(result);
+    }
+  });
+}
+
 exports.getAll = (req, res) => {
   Todo.find(function(err, todos) {
     if (err) {

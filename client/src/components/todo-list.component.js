@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
+
+const deleteId = (id) => {
+  axios.post('http://localhost:9000/delete/' + id)
+  .then(response => console.log(response))
+}
+
 const Todo = props => (
   <tr>
     <td className={props.todo.todo_completed ? 'completed' : ''}>
@@ -17,9 +23,11 @@ const Todo = props => (
     <td>
       <Link to={"/edit/" + props.todo._id}>Edit</Link>
     </td>
+    <td>
+      <button type="button" onClick={() => deleteId(props.todo._id)} className="btn btn-danger">Delete</button>
+    </td>
   </tr>
 )
-
 
 
 export function TodoList() {
@@ -31,14 +39,6 @@ export function TodoList() {
       setTodos(response.data)
     })
   }, []);
-
-  const tableBody = () => {
-    return (
-      todos.map(function(thisTodo, i) {
-        return <Todo todo={thisTodo} key={i}/>
-      })
-    )
-  }
 
   return (
     <div>
