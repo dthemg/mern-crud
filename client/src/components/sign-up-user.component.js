@@ -30,7 +30,9 @@ export function SignUp() {
         },
         body: JSON.stringify({
           username: data.username,
-          password: data.password
+          name: data.name,
+          password: data.password,
+          passwordConfirm: data.passwordConfirm
         })
       }
     );
@@ -60,6 +62,17 @@ export function SignUp() {
                 autoComplete="username"
                 inputRef={register}
                 />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="name"
+                label="Name"
+                name="name"
+                inputRef={register}
+              />
             </Grid>
             <Grid item xs={12}>
               <TextField
