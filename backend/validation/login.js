@@ -6,14 +6,13 @@ module.exports = function validateLoginInput(data) {
 
   // Strange declaration style...
   // Convert empty fields to empty strings
-  functions
-    data.email = !isEmpty(data.email) ? data.email : "";
-    data.password = !isEmpty(data.password) ? data.password : "";
+  data.email = !isEmpty(data.email) ? data.email : "";
+  data.password = !isEmpty(data.password) ? data.password : "";
 
   // Check email validity
   if (Validator.isEmpty(data.email)) {
     errors.email = "Email field empty";
-  } else if (Validator.isEmail(data.email)) {
+  } else if (!Validator.isEmail(data.email)) {
     errors.email = "Email invalid";
   }
 
