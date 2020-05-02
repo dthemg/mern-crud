@@ -3,7 +3,9 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const dbAdress = "mongodb://127.0.0.1:27017/mern-todo";
+const passport = require("passport");
 
+const usersRoutes = require("./routes/users.routes");
 const todoRoutes = require("./routes/todo.routes");
 const PORT = 9000;
 
@@ -17,6 +19,8 @@ https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e366
 // Register middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(passport.initialize());
+require("./config/passport")(passport);
 
 // Connection to database
 mongoose.connect(dbAdress, {
@@ -25,7 +29,8 @@ mongoose.connect(dbAdress, {
 const connection = mongoose.connection;
 
 // Set up routes
-app.use("/", todoRoutes);
+app.use("/todos", todoRoutes);
+app.use("/users", usersRoutes);
 
 connection.once("open", function () {
   console.log("MongoDB connection established");

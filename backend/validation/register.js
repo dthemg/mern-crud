@@ -6,13 +6,10 @@ module.exports = function validateRegisterInput(data) {
 
   // This declaration style seems very strange to me???
   // Convert any empty fields to empty strings
-  functions;
   data.name = !isEmpty(data.name) ? data.name : "";
   data.email = !isEmpty(data.email) ? data.email : "";
   data.password = !isEmpty(data.password) ? data.password : "";
-  data.passwordConfirm = !isEmpty(data.passwordConfirm)
-    ? data.passwordConfirm
-    : "";
+  data.passwordConfirm = !isEmpty(data.passwordConfirm) ? data.passwordConfirm : "";
 
   // Check name validity
   if (Validator.isEmpty(data.name)) {
@@ -36,12 +33,15 @@ module.exports = function validateRegisterInput(data) {
     errors.passwordConfirm = "Password confirmation empty";
   }
 
+  console.log(data.password);
+  console.log(data.passwordConfirm);
+
   // Check password length
-  if (Validator.isLength(data.password, { min: 6, max: 30 })) {
+  if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
     errors.password = "Password must be at least 6 charaters";
   }
 
-  if (Validator.equals(data.password, data.passwordConfirm)) {
+  if (!Validator.equals(data.password, data.passwordConfirm)) {
     errors.passwordConfirm = "Confirmation password must match";
   }
 
