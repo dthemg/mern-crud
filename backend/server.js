@@ -11,11 +11,6 @@ const PORT = 9000;
 
 const app = express();
 
-/*
-Follow this guide to figure out the parts about the login next!
-https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669
-*/
-
 // Register middleware
 app.use(cors());
 app.use(bodyParser.json());

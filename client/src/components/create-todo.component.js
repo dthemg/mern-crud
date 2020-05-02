@@ -22,7 +22,7 @@ export function CreateTodo() {
     console.log("Posting");
 
     axios
-      .post("http://localhost:9000/createNew", newTodo)
+      .post("http://localhost:9000/todos/createNew", newTodo)
       .then((res) => console.log(res.data));
 
     setTodoDescription("");

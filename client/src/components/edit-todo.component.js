@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import URIs from "../config/uris"
 
 export function EditTodo(props) {
   const [todoDescription, setTodoDescription] = useState("");
@@ -11,7 +12,7 @@ export function EditTodo(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:9000/getOne/" + id)
+      .get(URIs.getOne + id)
       .then((response) => {
         setTodoDescription(response.data.todo_description);
         setTodoResponsible(response.data.todo_responsible);
@@ -36,9 +37,8 @@ export function EditTodo(props) {
     };
 
     console.log("Posting");
-
     axios
-      .post("http://localhost:9000/update/" + id, updatedTodo)
+      .post(URIs.update + id, updatedTodo)
       .then((res) => console.log(res.data))
       .then(() => props.history.push("/"));
   };

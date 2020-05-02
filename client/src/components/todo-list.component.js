@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import URIs from "../config/uris";
+
 
 const deleteId = (id) => {
   axios
-    .post("http://localhost:9000/delete/" + id)
+    .post(URIs.delete + id)
     .then((response) => console.log(response));
 };
 
@@ -36,9 +38,8 @@ const Todo = (props) => (
 
 export function TodoList() {
   const [todos, setTodos] = useState([]);
-
   useEffect(() => {
-    axios.get("http://localhost:9000/getAll").then((response) => {
+    axios.get(URIs.getAll).then((response) => {
       setTodos(response.data);
     });
   }, []);
