@@ -1,8 +1,14 @@
-MERD App
 
+## MERN CRUD Todo with authentication
 
-## TODOS: 
-* Add proxy in package.json
-* Fix material UI styling in SignUp
-* Handling of error messages in signup/login
-* Handling of history...
+This app uses MERN:
+* **MongoDB** for storing user information and and TODO list
+* **ExpressJS** for creating an API to interface the client-side
+* **React** for creating a frontend
+* **NodeJS** as a runtime environment for running the backend in
+
+#### To run
+
+In the `client` folder run `npm start` to start the frontend
+
+In the `backend` folder run `npm start` to start the backend

@@ -30,7 +30,7 @@ class SignIn extends React.Component {
   }
 
   // SO many questionmarks in this one...
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/dashboard"); // If logged in redirect to dashboard
     }
